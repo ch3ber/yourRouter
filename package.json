@@ -1,6 +1,6 @@
 {
   "name": "yourrouter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vanilla JavaScript router.",
   "main": "lib/index.js",
   "directories": {
@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc src/*.ts src/**/*.ts",
+    "build": "tsc src/*.ts src/**/*.ts --outDir lib",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
