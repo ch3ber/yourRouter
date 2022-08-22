@@ -1,0 +1,46 @@
+{
+  "name": "yourrouter",
+  "version": "1.0.0",
+  "description": "Vanilla JavaScript router.",
+  "main": "lib/index.js",
+  "directories": {
+    "doc": "doc",
+    "example": "examples",
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc src/*.ts src/**/*.ts",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ch3ber/yourRouter.git"
+  },
+  "keywords": [
+    "javascript",
+    "vanilla-router",
+    "router",
+    "router.js"
+  ],
+  "author": "Eber Edrey Alejo Berrones <eber4202@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ch3ber/yourRouter/issues"
+  },
+  "homepage": "https://github.com/ch3ber/yourRouter#readme",
+  "dependencies": {
+    "typescript": "4.7.4",
+    "vite": "3.0.9"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "5.33.1",
+    "@typescript-eslint/parser": "5.33.1",
+    "eslint": "8.22.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.5",
+    "eslint-plugin-promise": "6.0.0"
+  }
+}
