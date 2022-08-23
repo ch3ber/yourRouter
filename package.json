@@ -1,6 +1,6 @@
 {
   "name": "yourrouter",
-  "version": "1.0.2",
+  "version": "1.0.21",
   "description": "Vanilla JavaScript router.",
   "main": "lib",
   "directories": {
@@ -43,6 +43,6 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.2.5",
     "eslint-plugin-promise": "6.0.0",
-    "tsc-alias": "^1.7.0"
+    "tsc-alias": "1.7.0"
   }
 }
