@@ -1,4 +1,4 @@
-import { Route } from '@models/route.model';
+import { Route } from '../models/route.model';
 export declare class RouteManager {
     private static instance;
     private staticPaths;

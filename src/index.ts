@@ -16,8 +16,8 @@ const Menu = (): Template => {
       <li><a href="/#/test/test">Go to Test</a></li>
       <li><a href="/#/product/123">Go to dynamic route</a></li>
       <li><a href="/#/newpost/321">Go to dynamic route similar</a></li>
-      <li><a href="/#/post/:id">Go to dynamic route</a></li>
-      <li><a href="/#/api/products/categories/small/:id">Go to extend dynamic route</a></li>
+      <li><a href="/#/post/New Post">Go to dynamic route</a></li>
+      <li><a href="/#/api/products/categories/small/20398475">Go to extend dynamic route</a></li>
       <li><a href="/#/api/products">Go to json</a></li>
       <li><a href="/#/api/product/:id">Go to dynamic json</a></li>
     </ul>
@@ -70,6 +70,16 @@ router.addRoute('/product/:id', () => {
   // document.querySelector('body')!.innerHTML = foo() as string
 })
 router.addRoute('/newpost/:id', () => {
+  // console.log(getRouteInfo.get())
+  return DynamicRoute
+  // document.querySelector('body')!.innerHTML = foo() as string
+})
+router.addRoute('/post/:id', () => {
+  // console.log(getRouteInfo.get())
+  return DynamicRoute
+  // document.querySelector('body')!.innerHTML = foo() as string
+})
+router.addRoute('/api/products/categories/small/:id', () => {
   // console.log(getRouteInfo.get())
   return DynamicRoute
   // document.querySelector('body')!.innerHTML = foo() as string

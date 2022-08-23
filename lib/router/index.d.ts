@@ -1,5 +1,5 @@
-import { Route } from '@models/route.model';
-import { AddRouteCallback, RouterConfig } from '@models/router.model';
+import { Route } from '../models/route.model';
+import { AddRouteCallback, RouterConfig } from '../models/router.model';
 export declare class Router {
     private static instance;
     private renderId;

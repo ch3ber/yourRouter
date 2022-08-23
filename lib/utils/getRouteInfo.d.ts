@@ -1,5 +1,5 @@
-import { RouteInfo } from '@models/getRouteInfo.model';
-import { Route } from '@models/route.model';
+import { RouteInfo } from '../models/getRouteInfo.model';
+import { Route } from '../models/route.model';
 export declare class GetRouteInfo {
     path(): RouteInfo['path'];
     splitPath(): RouteInfo['splitPath'];

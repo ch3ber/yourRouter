@@ -2,7 +2,7 @@
   "name": "yourrouter",
   "version": "1.0.2",
   "description": "Vanilla JavaScript router.",
-  "main": "lib/router/index.js",
+  "main": "lib",
   "directories": {
     "doc": "doc",
     "example": "examples",
@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "vite",
     "start": "tsc --watch",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
@@ -42,6 +42,7 @@
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.2.5",
-    "eslint-plugin-promise": "6.0.0"
+    "eslint-plugin-promise": "6.0.0",
+    "tsc-alias": "^1.7.0"
   }
 }
