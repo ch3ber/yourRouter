@@ -2,7 +2,7 @@
   "name": "yourrouter",
   "version": "1.0.1",
   "description": "Vanilla JavaScript router.",
-  "main": "lib/index.js",
+  "main": "lib/router/index.js",
   "directories": {
     "doc": "doc",
     "example": "examples",
@@ -10,7 +10,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc src/*.ts src/**/*.ts --outDir lib",
+    "start": "tsc --watch",
+    "build": "tsc",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },

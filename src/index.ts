@@ -48,34 +48,34 @@ const Home = (): Template => {
 }
 
 router.addRoute('/', () => {
-  console.log(router.getRouteInfo())
+  // console.log(getRouteInfo.get())
   return Home
   // document.querySelector('body')!.innerHTML = Home() as string
 })
 
 router.addRoute('/test', () => {
-  console.log(router.getRouteInfo())
+  // console.log(getRouteInfo.get())
   return foo
   // document.querySelector('body')!.innerHTML = foo() as string
 })
 
 router.addRoute('/test/test', () => {
-  console.log(router.getRouteInfo())
+  // console.log(getRouteInfo.get())
   return foo
   // document.querySelector('body')!.innerHTML = foo() as string
 })
 router.addRoute('/product/:id', () => {
-  console.log(router.getRouteInfo())
+  // console.log(getRouteInfo.get())
   return DynamicRoute
   // document.querySelector('body')!.innerHTML = foo() as string
 })
 router.addRoute('/newpost/:id', () => {
-  console.log(router.getRouteInfo())
+  // console.log(getRouteInfo.get())
   return DynamicRoute
   // document.querySelector('body')!.innerHTML = foo() as string
 })
 router.addRoute('/notFound', () => {
-  console.log(router.getRouteInfo())
+  // console.log(getRouteInfo.get())
   return () => '<h1>Error 404</h1>'
   // document.querySelector('body')!.innerHTML = '<h1>Error 404</h1>'
 })

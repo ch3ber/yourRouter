@@ -1,8 +1,8 @@
 import { Template } from './template.model'
 
-export type AddRouteCallback = (() => () => Template) | (() => void)
+export type AddRouteCallback = void | (() => () => Template)
 
-export type RouterConfig = {
+export interface RouterConfig {
   path404: string,
   renderId?: string
 }

@@ -1,25 +1,34 @@
-import { Route } from '@models/routes.model'
+import { Route } from '@models/route.model'
 import { AddRouteCallback, RouterConfig } from '@models/router.model'
+import { Template } from '@models/template.model'
+import { GetRouteInfo } from '@utils/getRouteInfo'
 import { renderInHtmlNode } from '@utils/renderInHtmlNode'
+import { RouteManager } from '@utils/routeManager'
+
+const getRouteInfo = new GetRouteInfo()
+const routeManager = RouteManager.getInstance()
 
 export class Router {
+  // eslint-disable-next-line no-use-before-define
   private static instance: Router
-  private appRoutes: Route[]
-  private appDynamicRoutes: Route[]
   private renderId: string
   private path404: string
 
   private constructor (config: RouterConfig) {
     this.path404 = config.path404
     this.renderId = config.renderId ?? ''
-    this.appRoutes = []
-    this.appDynamicRoutes = []
   }
 
+  /*
+    singleton method
+  */
   public static createInstance (config: RouterConfig): void {
     Router.instance = new Router(config)
   }
 
+  /*
+    singleton method
+  */
   public static getInstance (): Router {
     if (!Router.instance) {
       throw new Error('Need create Router instance: posible fix "Router.createInstance()"')
@@ -27,113 +36,52 @@ export class Router {
     return Router.instance
   }
 
-  private async mount () {
+  private async mount (): Promise<void> {
+    // set route to /#/
     window.location.hash = '/'
 
+    // mount router
     window.addEventListener('hashchange', async (event: HashChangeEvent) => {
       event.preventDefault()
-      const actualRoute = window.location.hash.slice(1)
-      await this.renderRoute(actualRoute)
+      const path = getRouteInfo.path()
+      if (this.renderId === '') return
+      await this.renderRoute(path)
     })
 
+    // render indexRoute
+    if (this.renderId === '') return
     await this.renderRoute('/')
-    // await this.loadListeners()
   }
 
   /*
-    add a new route to app routes
+    render actual route into html node (renderId)
+  */
+  private async renderRoute (path: string) {
+    if (!getRouteInfo.isValidRoute(path)) {
+      this.redyrectTo(this.path404)
+      return
+    }
+
+    const route = routeManager.find(path)
+    const routeCallback = route?.callback as () => unknown
+    await renderInHtmlNode(routeCallback() as () => Template, this.renderId)
+  }
+
+  redyrectTo (to: Route['path']): void {
+    window.location.hash = to
+  }
+
+  /*
+    add a new route
   */
   addRoute (path: string, callback: AddRouteCallback) {
-    if (this.appRoutes.length === 1) this.mount()
-    const isDynamicRoute = path.includes('/:')
-
-    if (isDynamicRoute) {
-      this.appDynamicRoutes.push({ path, callback })
-      return
-    }
-
-    this.appRoutes.push({ path, callback })
-  }
-
-  private async renderRoute (path: string) {
-    const isDynamicRoute = this.verifyDynamicRoute()
-    if (isDynamicRoute) {
-      this.renderDynamicRoute()
-      return
-    }
-
-    const isValidRoute = this.appRoutes.some(route => route.path === path)
-    if (!isValidRoute) {
-      window.location.hash = this.path404
-      return
-    }
-
-    const actualRoute = this.appRoutes.find(route => route.path === path)!
-    if (typeof actualRoute.callback() !== undefined) {
-      await renderInHtmlNode(actualRoute.callback(), this.renderId)
-    }
-    // await this.loadListeners()
-  }
-
-  private verifyDynamicRoute () {
-    const routeLength = window.location.hash.split('/').length
-    let isDynamicRoute = false
-
-    this.appDynamicRoutes.forEach(route => {
-      const nameLength = route.path.split('/').length
-      if (nameLength === routeLength) {
-        isDynamicRoute = true
-      }
-    })
-
-    return isDynamicRoute
-  }
-
-  private async renderDynamicRoute () {
-    const routePath = this.getDynamicRoutePath()
-    const actualRoute = this.appDynamicRoutes.find(route => route.path === routePath)!
-
-    if (typeof actualRoute.callback() !== undefined) {
-      await renderInHtmlNode(actualRoute.callback(), this.renderId)
-    }
-    // await this.loadListeners()
-  }
-
-  private getDynamicRoutePath (): string {
-    const routeLength = window.location.hash.split('/').length
-    let routeName = ''
-
-    this.appDynamicRoutes.forEach(route => {
-      if (route.path.split('/').length === routeLength) {
-        routeName = route.path
-      }
-    })
-
-    return routeName
-  }
-
-  getRouteInfo () {
-    const isDynamicRoute = this.verifyDynamicRoute()
-
-    if (isDynamicRoute) {
-      const name = this.getDynamicRoutePath()
-      const { callback } = this.appDynamicRoutes.find(route => route.path === name)!
-      return {
-        path: name,
-        callback
-      }
-    }
-
-    const path = window.location.hash.slice(1)
-    const { callback } = this.appRoutes.find(route => route.path === path)!
-    return {
-      path,
-      callback
-    }
+    if (routeManager.getAllPaths().length === 1) this.mount()
+    const route = { path, callback }
+    routeManager.add(route)
   }
 
   getRouteParam (): string {
-    const path = window.location.hash.split('/')!
-    return path[path.length - 1]
+    const splitPath = window.location.hash.slice(1).split('/')
+    return splitPath[splitPath.length - 1]
   }
 }
