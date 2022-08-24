@@ -2,7 +2,11 @@
   "name": "yourrouter",
   "version": "1.0.21",
   "description": "Vanilla JavaScript router.",
-  "main": "lib",
+  "type": "module",
+  "exports": {
+    ".": "./lib/index.js",
+    "./utils/*": "./lib/utils/*.js"
+  },
   "directories": {
     "doc": "doc",
     "example": "examples",
@@ -25,7 +29,7 @@
     "router",
     "router.js"
   ],
-  "author": "Eber Edrey Alejo Berrones <eber4202@hotmail.com>",
+  "author": "Eber Edrey Alejo Berrones <eber4202@hotmail.com> (https://ch3ber.github.io)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ch3ber/yourRouter/issues"
