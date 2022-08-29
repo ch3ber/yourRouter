@@ -1,7 +1,7 @@
 {
   "name": "yourrouter",
-  "version": "1.0.3",
-  "description": "Vanilla JavaScript router.",
+  "version": "1.0.31",
+  "description": "A powerful router based on client-side routing.",
   "type": "module",
   "exports": {
     ".": "./lib/index.js",
@@ -26,15 +26,18 @@
   "keywords": [
     "javascript",
     "vanilla-router",
+    "frontend-router",
+    "client-side",
     "router",
-    "router.js"
+    "router.js",
+    "yourrouter"
   ],
   "author": "Eber Edrey Alejo Berrones <eber4202@hotmail.com> (https://ch3ber.github.io)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ch3ber/yourRouter/issues"
   },
-  "homepage": "https://github.com/ch3ber/yourRouter#readme",
+  "homepage": "https://ch3ber.github.io/yourRouter",
   "dependencies": {
     "typescript": "4.7.4",
     "vite": "3.0.9"
