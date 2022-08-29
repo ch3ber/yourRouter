@@ -4,7 +4,7 @@ import { Router } from './index'
 
 Router.createInstance({
   path404: '/notFound',
-  renderId: '#app'
+  // renderId: '#app'
 })
 const router = Router.getInstance()
 
@@ -47,10 +47,11 @@ const Home = (): Template => {
   return view
 }
 
-router.addRoute('/', () => {
+router.addRoute('/', async () => {
   // console.log(getRouteInfo.get())
-  return Home
-  // document.querySelector('body')!.innerHTML = Home() as string
+  // return Home
+  const app = document.querySelector('#app')!
+  app.innerHTML = await Home() as string
 })
 
 router.addRoute('/test', () => {
@@ -66,13 +67,13 @@ router.addRoute('/test/test', () => {
 })
 router.addRoute('/product/:id', () => {
   // console.log(getRouteInfo.get())
-  return DynamicRoute
-  // document.querySelector('body')!.innerHTML = foo() as string
+  // return DynamicRoute
+  document.querySelector('#app')!.innerHTML = DynamicRoute() as string
 })
 router.addRoute('/newpost/:id', () => {
   // console.log(getRouteInfo.get())
   return DynamicRoute
-  // document.querySelector('body')!.innerHTML = foo() as string
+  // document.querySelector('body')!.innerHTML = DynamicRoute() as string
 })
 router.addRoute('/post/:id', () => {
   // console.log(getRouteInfo.get())

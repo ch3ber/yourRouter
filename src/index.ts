@@ -47,12 +47,25 @@ export class Router {
     window.addEventListener('hashchange', async (event: HashChangeEvent) => {
       event.preventDefault()
       const path = getRouteInfo.path()
-      if (this.renderId === '') return
+
+      if (this.renderId === '') {
+        const route = routeManager.find(path)
+        const routeCallback = route?.callback as () => unknown
+        await routeCallback()
+        return
+      }
+
       await this.renderRoute(path)
     })
 
     // render indexRoute
-    if (this.renderId === '') return
+    if (this.renderId === '') {
+      const path = getRouteInfo.path()
+      const route = routeManager.find(path)
+      const routeCallback = route?.callback as () => unknown
+      await routeCallback()
+      return
+    }
     await this.renderRoute('/')
   }
 
