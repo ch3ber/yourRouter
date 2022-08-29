@@ -1,6 +1,6 @@
 {
   "name": "yourrouter",
-  "version": "1.0.31",
+  "version": "1.0.4",
   "description": "A powerful router based on client-side routing.",
   "type": "module",
   "exports": {
