@@ -1,5 +1,5 @@
-import { Route } from './models/route.model';
-import { AddRouteCallback, RouterConfig } from './models/router.model';
+import { Route, RouteCallback } from './models/route.model';
+import { RouterConfig } from './models/router.model';
 export declare class Router {
     private static instance;
     private renderId;
@@ -8,8 +8,9 @@ export declare class Router {
     static createInstance(config: RouterConfig): void;
     static getInstance(): Router;
     private mount;
+    private onHashChange;
     private renderRoute;
     redyrectTo(to: Route['path']): void;
-    addRoute(path: string, callback: AddRouteCallback): void;
+    addRoute(path: string, callback: RouteCallback): void;
     getRouteParam(): string;
 }

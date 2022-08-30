@@ -54,7 +54,7 @@ export class Router {
     // render indexRoute
     if (this.renderId === undefined) {
       const routeInfo = getRouteInfo.get()
-      const callback = routeInfo.callback
+      const callback = routeInfo.callback!
       await callback()
       return
     }
@@ -77,7 +77,7 @@ export class Router {
 
     if (this.renderId === undefined) {
       const routeInfo = getRouteInfo.get()
-      const callback = routeInfo.callback
+      const callback = routeInfo.callback!
       await callback()
       return
     }
