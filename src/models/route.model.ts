@@ -1,9 +1,8 @@
-import { AddRouteCallback } from './router.model'
-// import { Template } from './template.model'
+import { Template } from './template.model'
 
-// export type RouteCallback = void | (() => () => Template) | Promise<void> | Promise<() => () => Template>
+export type RouteCallback = () => void | (() => () => Template)
 
 export type Route = {
   path: string,
-  callback: AddRouteCallback
+  callback: RouteCallback
 }

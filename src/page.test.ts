@@ -4,7 +4,7 @@ import { Router } from './index'
 
 Router.createInstance({
   path404: '/notFound',
-  // renderId: '#app'
+  renderId: '#app'
 })
 const router = Router.getInstance()
 
@@ -49,9 +49,9 @@ const Home = (): Template => {
 
 router.addRoute('/', async () => {
   // console.log(getRouteInfo.get())
-  // return Home
-  const app = document.querySelector('#app')!
-  app.innerHTML = await Home() as string
+  return Home
+  // const app = document.querySelector('#app')!
+  // app.innerHTML = await Home() as string
 })
 
 router.addRoute('/test', () => {
@@ -88,5 +88,5 @@ router.addRoute('/api/products/categories/small/:id', () => {
 router.addRoute('/notFound', () => {
   // console.log(getRouteInfo.get())
   return () => '<h1>Error 404</h1>'
-  // document.querySelector('body')!.innerHTML = '<h1>Error 404</h1>'
+  // document.querySelector('#app')!.innerHTML = '<h1>Error 404</h1>'
 })
