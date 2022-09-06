@@ -97,7 +97,7 @@ export class Router {
   /*
   * redyrect to new route
   */
-  redyrectTo (to: Route['path']): void {
+  redirectTo (to: Route['path']): void {
     window.location.hash = to
   }
 
