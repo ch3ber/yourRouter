@@ -17,6 +17,7 @@
     "start": "tsc --watch",
     "prepare": "npm run build",
     "build": "tsc && tsc-alias",
+    "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
@@ -46,6 +47,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.33.1",
     "@typescript-eslint/parser": "5.33.1",
+    "concurrently": "^7.3.0",
     "eslint": "8.22.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.26.0",
