@@ -71,7 +71,7 @@ export class Router {
     const path = getRouteInfo.path()
 
     if (!getRouteInfo.isValidRoute(path)) {
-      this.redyrectTo(this.path404)
+      this.redirectTo(this.path404)
       return
     }
 

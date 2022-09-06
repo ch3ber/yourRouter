@@ -10,7 +10,7 @@ export declare class Router {
     private mount;
     private onHashChange;
     private renderRoute;
-    redyrectTo(to: Route['path']): void;
+    redirectTo(to: Route['path']): void;
     addRoute(path: string, callback: RouteCallback): void;
     getRouteParam(): string;
 }
