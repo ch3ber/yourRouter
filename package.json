@@ -16,7 +16,7 @@
     "dev": "tsc --watch",
     "test:vite": "vite",
     "prepare": "npm run build",
-    "build": "./pre-build.sh tsc --project tsconfig.production.json && tsc-alias",
+    "build": "sh ./pre-build.sh && tsc --project tsconfig.production.json && tsc-alias",
     "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
