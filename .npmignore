@@ -1,6 +1,11 @@
+__test__
 docs
-examples
 node_modules
 src
+.eslintrc.cjs
 vite.config.js
-__test__
+index.html
+pre-build.sh
+tsconfig.json
+tsconfig.production.json
+vite.config.js
