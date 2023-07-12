@@ -1,6 +1,6 @@
 // imports
 import { Template } from '@models/template.model'
-import { Router } from './index'
+import { Router } from '../src/index'
 
 Router.createInstance({
   path404: '/notFound',

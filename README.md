@@ -1,5 +1,5 @@
 
-![Logo](./docs/img/full-logo.png)
+![Logo](https://github.com/ch3ber/yourRouter/blob/main/docs/img/full-logo.png?raw=true)
 
 
 # yourRouter

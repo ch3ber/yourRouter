@@ -1,12 +1,12 @@
 import { defineConfig } from 'vite'
-import path from 'path'
+import { resolve } from 'path'
 
 export default defineConfig({
   resolve: {
     alias: {
-      '@components': path.resolve(__dirname, './src/components'),
-      '@utils': path.resolve(__dirname, './src/utils'),
-      '@models': path.resolve(__dirname, './src/models')
+      '@components': resolve(__dirname, './src/components'),
+      '@utils': resolve(__dirname, './src/utils'),
+      '@models': resolve(__dirname, './src/models')
     }
   }
 })

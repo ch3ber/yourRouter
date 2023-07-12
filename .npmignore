@@ -1,5 +1,6 @@
-doc
+docs
 examples
 node_modules
 src
 vite.config.js
+__test__
