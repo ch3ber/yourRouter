@@ -24,7 +24,7 @@ A powerful router based on client-side routing
 Install my-project with npm
 
 ```bash
-  npm i -D yourrouter
+  npm i yourrouter
 ```
 
 ## Feedback
