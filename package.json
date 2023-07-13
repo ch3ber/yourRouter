@@ -8,18 +8,19 @@
     "./utils/*": "./lib/utils/*.js"
   },
   "directories": {
-    "doc": "doc",
-    "example": "examples",
     "lib": "lib"
   },
   "scripts": {
-    "dev": "tsc --watch",
-    "test:vite": "vite",
-    "prepare": "npm run build",
     "build": "sh ./pre-build.sh && tsc --project tsconfig.production.json && tsc-alias",
     "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
+    "dev": "tsc --watch",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "prepare": "npm run build",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:vite": "vite",
+    "test:watch": "vitest --watch"
   },
   "repository": {
     "type": "git",
@@ -40,10 +41,7 @@
     "url": "https://github.com/ch3ber/yourRouter/issues"
   },
   "homepage": "https://ch3ber.github.io/yourRouter",
-  "dependencies": {},
   "devDependencies": {
-    "typescript": "4.7.4",
-    "vite": "3.0.9",
     "@typescript-eslint/eslint-plugin": "5.33.1",
     "@typescript-eslint/parser": "5.33.1",
     "concurrently": "7.3.0",
@@ -52,6 +50,9 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.2.5",
     "eslint-plugin-promise": "6.0.0",
-    "tsc-alias": "1.7.0"
+    "tsc-alias": "1.7.0",
+    "typescript": "4.7.4",
+    "vite": "3.0.9",
+    "vitest": "0.33.0"
   }
 }
