@@ -41,6 +41,9 @@
     "url": "https://github.com/ch3ber/yourRouter/issues"
   },
   "homepage": "https://ch3ber.github.io/yourRouter",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.33.1",
     "@typescript-eslint/parser": "5.33.1",
