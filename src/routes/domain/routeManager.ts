@@ -1,4 +1,4 @@
-import { Route } from '@models/route.model'
+import { Route } from '@types'
 
 export class RouteManager {
   // eslint-disable-next-line no-use-before-define

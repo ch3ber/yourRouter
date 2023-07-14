@@ -1,6 +1,5 @@
-import { RouteInfo } from '@models/getRouteInfo.model'
-import { Route } from '@models/route.model'
-import { RouteManager } from './routeManager'
+import { RouteInfo, Route } from '@types'
+import { RouteManager } from '../domain/routeManager'
 
 const routeManager = RouteManager.getInstance()
 
@@ -29,7 +28,7 @@ export class GetRouteInfo {
     return window.location.hash.slice(1).length
   }
 
-  callback (): RouteInfo ['callback'] {
+  callback (): RouteInfo['callback'] {
     const route = routeManager.find(this.path())
     return route?.callback
   }

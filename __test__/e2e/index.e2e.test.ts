@@ -1,6 +1,4 @@
-// imports
-import { Template } from '@models/template.model'
-import { Router } from '../../src/index'
+import { Router } from '../../lib'
 
 Router.createInstance({
   path404: '/notFound',
@@ -8,7 +6,7 @@ Router.createInstance({
 })
 const router = Router.getInstance()
 
-const Menu = (): Template => {
+const Menu = () => {
   const view = `
     <ul>
       <li><a href="/#/">Go to Home</a></li>
@@ -25,13 +23,13 @@ const Menu = (): Template => {
   return view
 }
 
-const DynamicRoute = (): Template => {
+const DynamicRoute = () => {
   const param = router.getRouteParam()
   const view = `<h1>The route param is: ${param}</h1>`
   return view
 }
 
-const foo = (): Template => {
+const foo = () => {
   const view = `
     <h1>Test page addRoute</h1>
     ${Menu()}
@@ -39,7 +37,7 @@ const foo = (): Template => {
   return view
 }
 
-const Home = (): Template => {
+const Home = () => {
   const view = `
     <h1>Home</h1>
     ${Menu()}

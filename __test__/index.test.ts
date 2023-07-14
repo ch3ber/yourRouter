@@ -1,4 +1,4 @@
-import { Router } from 'src'
+import { Router } from '@/router'
 import { describe, expect, it } from 'vitest'
 
 describe('Router test', () => {
