@@ -4,15 +4,14 @@
   "description": "A powerful router based on client-side routing.",
   "type": "module",
   "exports": {
-    ".": "./lib/index.js",
-    "./utils/*": "./lib/utils/*.js"
+    ".": "./lib/index.js"
   },
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "build": "sh ./pre-build.sh && tsc --project tsconfig.production.json && tsc-alias",
-    "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
+    "build": "sh ./pre-build.sh && tsc --project tsconfig.production.json && tsc-alias -p tsconfig.production.json",
+    "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
     "dev": "tsc --watch",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
@@ -45,17 +44,17 @@
     "registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "5.33.1",
-    "@typescript-eslint/parser": "5.33.1",
-    "concurrently": "7.3.0",
-    "eslint": "8.22.0",
-    "eslint-config-standard": "17.0.0",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-n": "15.2.5",
-    "eslint-plugin-promise": "6.0.0",
-    "tsc-alias": "1.7.0",
-    "typescript": "4.7.4",
-    "vite": "3.0.9",
+    "@typescript-eslint/eslint-plugin": "6.0.0",
+    "@typescript-eslint/parser": "6.0.0",
+    "concurrently": "8.2.0",
+    "eslint": "8.44.0",
+    "eslint-config-standard": "17.1.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-n": "16.0.1",
+    "eslint-plugin-promise": "6.1.1",
+    "tsc-alias": "1.8.7",
+    "typescript": "5.1.6",
+    "vite": "4.4.3",
     "vitest": "0.33.0"
   }
 }
