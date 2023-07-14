@@ -1,3 +1,3 @@
-export {
-  Router
-} from './router/infrastructure/router'
+import { Router } from './router/infrastructure/router'
+
+export default Router

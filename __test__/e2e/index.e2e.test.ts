@@ -1,4 +1,4 @@
-import { Router } from '../../lib'
+import Router from '../../lib'
 
 Router.create({
   path404: '/notFound',
