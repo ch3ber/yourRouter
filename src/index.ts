@@ -1,3 +1,3 @@
 export {
   Router
-} from './router'
+} from './router/infrastructure/router'

@@ -1,5 +1,5 @@
 import { RouteInfo, Route } from '@types'
-import { RouteManager } from '../domain/routeManager'
+import { RouteManager } from './routeManager'
 
 const routeManager = RouteManager.getInstance()
 

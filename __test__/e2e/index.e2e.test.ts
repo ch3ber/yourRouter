@@ -1,17 +1,17 @@
 import { Router } from '../../lib'
 
-Router.createInstance({
+Router.create({
   path404: '/notFound',
   renderId: '#app'
 })
-const router = Router.getInstance()
+const router = Router.get()
 
 const Menu = () => {
   const view = `
     <ul>
       <li><a href="/#/">Go to Home</a></li>
       <li><a href="/#/test">Go to Test</a></li>
-      <li><a href="/#/test/test">Go to Test</a></li>
+      <li><a href="/#/test/test">Go to Test/test</a></li>
       <li><a href="/#/product/123">Go to dynamic route</a></li>
       <li><a href="/#/newpost/321">Go to dynamic route similar</a></li>
       <li><a href="/#/post/New Post">Go to dynamic route</a></li>
