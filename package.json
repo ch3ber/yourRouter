@@ -10,7 +10,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "build": "sh ./pre-build.sh && tsc --project tsconfig.production.json && tsc-alias -p tsconfig.production.json",
+    "build": "npm run build:prepare && tsc --project tsconfig.production.json && npm run build:post",
+    "build:post": "tsc-alias -p tsconfig.production.json",
+    "build:prepare": "sh ./scripts/pre-build.sh",
     "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
     "dev": "tsc --watch",
     "lint": "eslint",
