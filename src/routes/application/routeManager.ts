@@ -1,12 +1,12 @@
-import { Route } from '@types'
+import { RouteI, RoutePath } from '@types'
 
 export class RouteManager {
   // eslint-disable-next-line no-use-before-define
   private static instance: RouteManager
-  private staticPaths: Route['path'][]
-  private staticRoutes: Route[]
-  private dynamicPaths: Route['path'][]
-  private dynamicRoutes: Route[]
+  private staticPaths: RoutePath[]
+  private staticRoutes: RouteI[]
+  private dynamicPaths: RoutePath[]
+  private dynamicRoutes: RouteI[]
 
   private constructor () {
     this.staticPaths = []
@@ -23,7 +23,7 @@ export class RouteManager {
     return RouteManager.instance
   }
 
-  add (route: Route): void {
+  add (route: RouteI): void {
     const isDynamicRoute = route.path.includes('/:')
 
     if (isDynamicRoute) {
@@ -36,31 +36,31 @@ export class RouteManager {
     this.staticPaths.push(route.path)
   }
 
-  getAllPaths (): Route['path'][] {
+  getAllPaths (): RoutePath[] {
     return [...this.staticPaths, ...this.dynamicPaths]
   }
 
-  getStaticPaths (): Route['path'][] {
+  getStaticPaths (): RoutePath[] {
     return this.staticPaths
   }
 
-  getDynamicPaths (): Route['path'][] {
+  getDynamicPaths (): RoutePath[] {
     return this.dynamicPaths
   }
 
-  getAllRoutes (): Route[] {
+  getAllRoutes (): RouteI[] {
     return [...this.staticRoutes, ...this.dynamicRoutes]
   }
 
-  getStaticRoutes (): Route[] {
+  getStaticRoutes (): RouteI[] {
     return this.staticRoutes
   }
 
-  getDynamicRoutes (): Route[] {
+  getDynamicRoutes (): RouteI[] {
     return this.dynamicRoutes
   }
 
-  find (path: Route['path']): Route | undefined {
+  find (path: RoutePath): RouteI | undefined {
     return this.getAllRoutes().find(route => route.path === path)
   }
 }

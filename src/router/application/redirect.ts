@@ -1,10 +1,10 @@
-import { Route } from '@/types'
+import { RoutePath } from '@/types'
 
 export class Redirect {
   /*
   * redyrect to new route
   */
-  to (route: Route['path']): void {
+  to (route: RoutePath): void {
     window.location.hash = route
   }
 }

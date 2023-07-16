@@ -1,4 +1,4 @@
-import { RouteInfo, Route } from '@types'
+import { RouteInfo, RoutePath } from '@types'
 import { RouteManager } from './routeManager'
 
 const routeManager = RouteManager.getInstance()
@@ -8,7 +8,7 @@ export class GetRouteInfo {
     if (this.isDynamicRoute()) {
       return this.getDynamicRoutePath()
     }
-    return window.location.hash.slice(1)
+    return window.location.hash.slice(1) as RoutePath
   }
 
   splitPath (): RouteInfo['splitPath'] {
@@ -52,7 +52,7 @@ export class GetRouteInfo {
     return isDynamicRoute
   }
 
-  isValidRoute (path: Route['path']): boolean {
+  isValidRoute (path: RoutePath): boolean {
     if (this.isDynamicRoute()) {
       const dynamicPath = this.path()
       return routeManager.getDynamicPaths().some(xpath => xpath === dynamicPath)
@@ -75,7 +75,7 @@ export class GetRouteInfo {
       }
     })
 
-    return dynamicPath
+    return dynamicPath as RoutePath
   }
 
   get (): RouteInfo {

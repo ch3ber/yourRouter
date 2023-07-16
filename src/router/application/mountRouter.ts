@@ -1,4 +1,4 @@
-import { RouterConfig, Template } from '@/types'
+import { RouterConfig, Template, RoutePath } from '@/types'
 
 import { renderInHtmlNode } from '@/rendering/domain/renderInHtmlNode'
 import { GetRouteInfo } from '@/routes/application/getRouteInfo'
@@ -8,10 +8,10 @@ import { Redirect } from './redirect'
 export class MountRouter {
   private getRouteInfo = new GetRouteInfo()
   private redirect = new Redirect()
-  private routeManager
 
-  private renderId: string | undefined
-  private path404: string
+  private path404
+  private renderId
+  private routeManager
 
   constructor (config: RouterConfig) {
     this.path404 = config.path404
@@ -22,7 +22,7 @@ export class MountRouter {
   /*
   * render actual route into html node (renderId)
   */
-  private async renderRoute (path: string) {
+  private async renderRoute (path: RoutePath) {
     const { callback } = this.routeManager.find(path)!
     const template = await callback() as unknown
     await renderInHtmlNode(template as () => Template, this.renderId as string)
