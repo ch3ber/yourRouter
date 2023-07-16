@@ -9,6 +9,13 @@ export default defineConfig({
     }
   },
   test: {
-    exclude: [...configDefaults.exclude, 'lib/*', '**/*.e2e.test.ts']
+    exclude: [...configDefaults.exclude, 'lib/*', '**/*.e2e.test.ts'],
+    globals: true,
+    browser: {
+      headless: true,
+      provider: 'playwright',
+      enabled: true,
+      name: 'chromium'
+    }
   }
 })
