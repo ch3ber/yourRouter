@@ -1,31 +1,23 @@
-import { RouterConfig, Template, RoutePath } from '@/types'
+import { RouterConfig } from '@/types'
 
-import { renderInHtmlNode } from '@/rendering/domain/renderInHtmlNode'
-import { GetRouteInfo } from '@/routes/application/getRouteInfo'
-import { RouteManager } from '@/routes/application/routeManager'
 import { Redirect } from './redirect'
+import { GetRouteInfo } from '@/routes/application/getRouteInfo'
+import { RenderRoute } from '@/rendering/application/RenderRoute'
+import { ExecuteCurrentRouteCallback } from './ExecuteCurrentRouteCallaback'
 
 export class MountRouter {
-  private getRouteInfo = new GetRouteInfo()
   private redirect = new Redirect()
+  private getRouteInfo = new GetRouteInfo()
+  private executeCurrentCallback = new ExecuteCurrentRouteCallback()
+  private renderRoute: RenderRoute
 
-  private path404
-  private renderId
-  private routeManager
+  private readonly path404
+  private readonly renderId
 
   constructor (config: RouterConfig) {
     this.path404 = config.path404
     this.renderId = config.renderId
-    this.routeManager = RouteManager.getInstance()
-  }
-
-  /*
-  * render actual route into html node (renderId)
-  */
-  private async renderRoute (path: RoutePath) {
-    const { callback } = this.routeManager.find(path)!
-    const template = await callback() as unknown
-    await renderInHtmlNode(template as () => Template, this.renderId as string)
+    this.renderRoute = new RenderRoute(this.renderId)
   }
 
   /*
@@ -34,21 +26,11 @@ export class MountRouter {
   * change event occours
   */
   async mount (): Promise<void> {
-    // set route to /#/
+    // set windows.location.href to /#/
     window.location.hash = '/'
 
     // mount router
-    window.addEventListener('hashchange', (e) => this.onHashChange(e))
-
-    // render indexRoute
-    if (this.renderId === undefined) {
-      const routeInfo = this.getRouteInfo.get()
-      const callback = routeInfo.callback!
-      await callback()
-      return
-    }
-
-    await this.renderRoute('/')
+    window.addEventListener('hashchange', async (e) => await this.onHashChange(e))
   }
 
   /*
@@ -57,20 +39,23 @@ export class MountRouter {
   */
   private async onHashChange (event: HashChangeEvent): Promise<void> {
     event.preventDefault()
-    const path = this.getRouteInfo.path()
+    // get the current user path
+    const currentUserPath = this.getRouteInfo.path()
 
-    if (!this.getRouteInfo.isValidRoute(path)) {
+    // validate if the path exist in the app,
+    // if not exist redirect the user to the 404 page
+    const theCurrentPathExist = this.getRouteInfo.isValidRoute(currentUserPath)
+    if (!theCurrentPathExist) {
       this.redirect.to(this.path404)
       return
     }
 
-    if (this.renderId === undefined) {
-      const routeInfo = this.getRouteInfo.get()
-      const callback = routeInfo.callback!
-      await callback()
+    const templateRenderingIsDisable = this.renderId === undefined
+    if (templateRenderingIsDisable) {
+      await this.executeCurrentCallback.execute()
       return
     }
 
-    await this.renderRoute(path)
+    await this.renderRoute.renderCurrentRoute()
   }
 }

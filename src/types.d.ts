@@ -2,6 +2,8 @@ export type Template = string | Promise<string>
 
 export type RouteCallback = () => void | (Promise<() => Template>) | (() => Template)
 
+export type RouteCallbackWihoutTemplateRendering = () => void | (Promise<() => Template>) | (() => Template) | (() => Promise<void>)
+
 export type RoutePath = `/${string}`
 
 export interface RouteI {

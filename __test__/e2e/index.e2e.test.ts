@@ -4,6 +4,7 @@ Router.create({
   path404: '/notFound',
   renderId: '#app'
 })
+
 const router = Router.get()
 
 const Menu = () => {
@@ -54,8 +55,8 @@ router.addRoute('/', async () => {
 
 router.addRoute('/test', () => {
   // console.log(getRouteInfo.get())
-  return foo
   // document.querySelector('body')!.innerHTML = foo() as string
+  return foo
 })
 
 router.addRoute('/test/test', () => {

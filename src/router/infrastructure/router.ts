@@ -1,44 +1,67 @@
-import { Route, RouteCallback, RouterConfig } from '@types'
-import { RouteManager } from '@/routes/application/routeManager'
+import { RouteCallback, RoutePath, RouterConfig } from '@types'
 import { MountRouter } from '../application/mountRouter'
 import { Redirect } from '../application/redirect'
-
-const routeManager = RouteManager.getInstance()
+import { GetRouteParam } from '../application/GetRouteParam'
+import { AddRoute } from '../application/AddRoute'
+import { RenderRoute } from '@/rendering/application/RenderRoute'
 
 export class Router {
   // eslint-disable-next-line no-use-before-define
-  private static instance: Router
+  private static _instance: Router | undefined
   private mountRouter: MountRouter
   private redirect = new Redirect()
+  private getRouteParamUtil = new GetRouteParam()
+  private addRouteUtil = new AddRoute()
+  private renderRoute: RenderRoute
+  query: unknown
 
   private constructor (config: RouterConfig) {
     this.mountRouter = new MountRouter(config)
+    this.mountRouter.mount()
+    this.renderRoute = new RenderRoute(config.renderId)
   }
 
-  /*
-  * create a new router with config
-  */
-  public static create (config: RouterConfig): void {
-    if (config.path404 === undefined) {
-      throw new Error('Need specific 404 HTTP Error path in Router config. To fix use: { path404: \'YOUR PATH\' }')
+  /**
+   * Create a new router with a single instance,
+   * require a 404 path to create the instance
+   * @param config router's config
+   */
+  public static create (config: RouterConfig): Router | undefined {
+    if (typeof config.path404 !== 'string') {
+      throw new Error('Please specific a 404 HTTP Error path in your Router config. To fix add { path404: "/example/path" } to your config.')
     }
-    Router.instance = new Router(config)
+
+    if (Router._instance) {
+      throw new Error('You are trying to create another Router.')
+    }
+
+    if (!Router._instance) {
+      Router._instance = new Router(config)
+      return Router._instance
+    }
   }
 
   /*
   * method to get instance of Router
   */
   public static get (): Router {
-    if (!Router.instance) {
-      throw new Error('Need create Router instance: posible fix "Router.createInstance({})"')
+    if (!Router._instance) {
+      throw new Error('First you need create a Router. To fix use: "Router.create({})"')
     }
-    return Router.instance
+    return Router._instance
+  }
+
+  /**
+   * This method is only for test propousing
+   */
+  static destroy () {
+    Router._instance = undefined
   }
 
   /*
-  * redyrect to new route
+  * Redirect the user to a existing route
   */
-  redirectTo (path: Route['path']) {
+  redirectTo (path: RoutePath): void {
     this.redirect.to(path)
   }
 
@@ -46,14 +69,16 @@ export class Router {
   * add a new route to routeManager and
   * mount the router when there is a route
   */
-  addRoute (path: string, callback: RouteCallback) {
-    if (path[0] !== '/') {
-      throw new Error('All paths need start with "/". Example: /test/route or /dynamic/route/:id')
-    }
+  addRoute (path: RoutePath, callback: RouteCallback) {
+    this.addRouteUtil.add(path, callback)
 
-    if (routeManager.getAllPaths().length === 1) this.mountRouter.mount()
-    const route = { path, callback }
-    routeManager.add(route)
+    // render the current route if the user are in
+    // the home page and is the interaction with the page
+    const currentPath = window.location.hash.slice(1)
+    const isTheFisrtRenderAndTheUserAreThere = currentPath === path
+    if (isTheFisrtRenderAndTheUserAreThere) {
+      this.renderRoute.renderCurrentRoute()
+    }
   }
 
   /*
@@ -65,8 +90,10 @@ export class Router {
    * param: /example/route/253
    * returns 253 as string
    */
-  getRouteParam (): string {
-    const splitPath = window.location.hash.slice(1).split('/')
-    return splitPath[splitPath.length - 1]
+  getRouteParam () {
+    // const currentQuery = this.getRouteParam.get()
+    // const queryName = 'NAME'
+    // this.query[queryName] = currentQuery
+    return this.getRouteParamUtil.get()
   }
 }
