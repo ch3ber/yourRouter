@@ -20,7 +20,7 @@
     "prepare": "npm run build",
     "test": "vitest --watch=false --environment=jsdom",
     "test:coverage": "sh ./scripts/pre-coverage.sh && vitest run --coverage --environment=jsdom",
-    "test:vite": "vite",
+    "test:vite": "npm run build && vite",
     "test:watch": "vitest --environment=jsdom"
   },
   "repository": {
