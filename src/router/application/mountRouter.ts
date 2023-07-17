@@ -1,6 +1,6 @@
 import { RouterConfig } from '@/types'
 
-import { Redirect } from './redirect'
+import { Redirect } from '@/router/domain/redirect'
 import { GetRouteInfo } from '@/routes/application/getRouteInfo'
 import { RenderRoute } from '@/rendering/application/RenderRoute'
 import { ExecuteCurrentRouteCallback } from './ExecuteCurrentRouteCallaback'

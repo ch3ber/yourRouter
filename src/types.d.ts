@@ -5,6 +5,8 @@ export type RouteCallback = () => void | (Promise<() => Template>) | (() => Temp
 export type RouteCallbackWihoutTemplateRendering = () => void | (Promise<() => Template>) | (() => Template) | (() => Promise<void>)
 
 export type RoutePath = `/${string}`
+// this type is used in transformHashRouteToStandardRoute.ts
+export type RoutePathWithHash = `#/${string}`
 
 export interface RouteI {
   path: RoutePath
