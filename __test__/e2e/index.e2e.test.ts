@@ -1,9 +1,12 @@
+import { RouterConfig } from 'lib/types'
 import Router from '../../lib'
 
-Router.create({
+const config: RouterConfig = {
   path404: '/notFound',
   renderId: '#app'
-})
+}
+
+Router.create(config)
 
 const router = Router.get()
 
