@@ -1,4 +1,4 @@
-import { GetRouteInfo } from '@/routes/application/getRouteInfo'
+import { GetRouteInfo } from '@/routes/application/GetRouteInfo'
 
 export class ExecuteCurrentRouteCallback {
   private getRouteInfo = new GetRouteInfo()
