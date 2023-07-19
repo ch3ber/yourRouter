@@ -63,4 +63,11 @@ export class RouteManager {
   find (path: RoutePath): RouteI | undefined {
     return this.getAllRoutes().find(route => route.path === path)
   }
+
+  reset () {
+    this.staticPaths = []
+    this.staticRoutes = []
+    this.dynamicPaths = []
+    this.dynamicRoutes = []
+  }
 }
