@@ -7,6 +7,9 @@
 - [ ] Support for query params
 - [ ] case sensitive
 
+# To launch v2.1.1
+- [ ] Fix double render in Router
+
 # TODOS
 - [ ] Improve the test coverage
 - [ ] Refactor the project arquitecture
