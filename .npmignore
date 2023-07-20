@@ -3,11 +3,12 @@ __test__
 coverage
 docs
 node_modules
+scripts
 src
 .eslintrc.cjs
-vite.config.js
+CONTRIBUTING.md
 index.html
-pre-build.sh
+TODOS.md
 tsconfig.json
 tsconfig.production.json
 vite.config.js
