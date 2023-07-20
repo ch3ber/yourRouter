@@ -1,19 +1,29 @@
 {
   "name": "yourrouter",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A powerful router based on client-side routing.",
   "type": "module",
-  "types": "./lib/types.d.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "exports": {
-    ".": "./lib/index.js"
+    ".": "./lib/index.js",
+    "./types": "./lib/types.js"
+  },
+  "typesVersions": {
+    "*": {
+      "types": [
+        "lib/types.d.ts"
+      ]
+    }
   },
   "directories": {
     "lib": "lib"
   },
   "scripts": {
     "build": "npm run build:prepare && tsc --project tsconfig.production.json && npm run build:post",
-    "build:post": "tsc-alias -p tsconfig.production.json && tsc --project tsconfig.declarations.json",
+    "build:post": "npm run build:declarations && tsc-alias -p tsconfig.production.json ",
     "build:prepare": "sh ./scripts/pre-build.sh",
+    "build:declarations": "tsc --project tsconfig.declarations.json",
     "build:watch": "npm run build && (concurrently \"tsc -w --project tsconfig.production.json\" \"tsc-alias -w\")",
     "dev": "tsc --watch",
     "lint": "eslint",
