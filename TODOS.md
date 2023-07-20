@@ -1,5 +1,5 @@
 # To launch v2.0.3
-- [ ] fix getRouteParams
+- [x] fix getRouteParams
 - [x] improve route management system
 - [x] Update the docs
 
@@ -16,5 +16,5 @@
 - [ ] Add unit tests
 - [ ] Add integration tests
 - [ ] Add e2e tests
-- [ ] Add CI/CD with github actions
+- [x] Add CI/CD with github actions
 - [ ] Documentation with project examples
