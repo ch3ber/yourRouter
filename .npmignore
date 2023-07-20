@@ -9,6 +9,7 @@ src
 CONTRIBUTING.md
 index.html
 TODOS.md
+tsconfig.declarations.json
 tsconfig.json
 tsconfig.production.json
 vite.config.js
