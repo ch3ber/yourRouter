@@ -23,6 +23,10 @@ export class AddRoute {
       throw new Error(`Error adding a route. The router don't allow duplicated routes. The route "${path}" is an existing route.`)
     }
 
+    if (callback === undefined) {
+      throw new Error(`Error adding a route. The callback for "${path}" is undefine. To fix add a callback for your route with "routerInstance.addRoute('/foo', callback)"`)
+    }
+
     const route = { path, callback }
     this.routeManager.add(route)
   }

@@ -18,14 +18,20 @@ export class RenderRoute {
       throw new Error(`Error rendering a route. The callback for "${currentRoute}" is undefine. To fix add a callback for your route with "routerInstance.addRoute('/foo', callback)"`)
     }
 
-    const template = await callback()
+    const templateFn = await callback()
 
     // check if template rendering is enable but the current route
     // doesn't have a template
+    if (typeof templateFn !== 'function') {
+      return
+    }
+
+    const template = templateFn()
+
     if (template === undefined) {
       return
     }
 
-    await renderTemplateInHtmlByQueryId(template, this.renderId)
+    renderTemplateInHtmlByQueryId(template, this.renderId)
   }
 }
