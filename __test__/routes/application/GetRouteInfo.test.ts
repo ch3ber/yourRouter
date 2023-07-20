@@ -5,13 +5,14 @@ import { RoutePath } from '@/types'
 import { afterEach, describe, expect, it } from 'vitest'
 
 describe('GetRouteInfo', () => {
+  const getRouteInfo = new GetRouteInfo()
+
   describe('isDynamicRoute method', () => {
     afterEach(() => {
       RouteManager.getInstance().reset()
     })
 
     it('Should return true if the current route is a daynamic route', () => {
-      const getRouteInfo = new GetRouteInfo()
       const addRoute = new AddRoute()
 
       let dynamicRouteForTest: RoutePath = '/foo/:id/bar'
@@ -28,7 +29,6 @@ describe('GetRouteInfo', () => {
     })
 
     it('should return true with similar paths', () => {
-      const getRouteInfo = new GetRouteInfo()
       const addRoute = new AddRoute()
 
       const dynamicRouteForTest: RoutePath = '/zulu/:zulu/foo/bar'

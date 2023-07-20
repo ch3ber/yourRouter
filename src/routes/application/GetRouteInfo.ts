@@ -1,25 +1,12 @@
 import { RouteInfo, RoutePath } from '@types'
 import { RouteManager } from '../domain/routeManager'
-import { GetRouteParams } from './GetRouteParams'
 import { AreCurrentRouteDynamic } from './AreCurrentRouteDynamic'
 import { GetDynamicRoutePath } from './GetDynamicRoutePath'
 
 export class GetRouteInfo {
-  private getRouteParamsUtil = new GetRouteParams()
   private routeManager = RouteManager.getInstance()
   private areCurrentRoteDynamic = new AreCurrentRouteDynamic()
   private getDynamicRoutePathUtil = new GetDynamicRoutePath()
-
-  getRouteParams () {
-    // check if the current route is a dynamic route
-    // get the current route
-    // get the dynamic params
-    if (!this.isDynamicRoute()) {
-      return {}
-    }
-
-    return this.getRouteParamsUtil.get()
-  }
 
   path (): RouteInfo['path'] {
     if (this.isDynamicRoute()) {

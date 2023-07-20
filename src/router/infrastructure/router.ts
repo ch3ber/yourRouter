@@ -3,7 +3,7 @@ import { RouteCallback, RoutePath, RoutePathWithHash, RouterConfig } from '@type
 import { MountRouter } from '@/router/application/mountRouter'
 import { AddRoute } from '@/router/application/AddRoute'
 import { RenderRoute } from '@/rendering/application/RenderRoute'
-import { GetRouteInfo } from '@/routes/application/GetRouteInfo'
+import { GetRouteParams } from '@/routes/application/GetRouteParams'
 
 import { Redirect } from '@/router/domain/redirect'
 
@@ -13,7 +13,7 @@ export class Router {
   query: unknown
 
   private mountRouter: MountRouter
-  private getRouteInfoUtil = new GetRouteInfo()
+  private getRouteParamsUtil = new GetRouteParams()
   private addRouteUtil = new AddRoute()
   private renderRoute: RenderRoute
 
@@ -83,19 +83,15 @@ export class Router {
     }
   }
 
-  /*
-   * returns the route param as string
+  /**
+   * Returns an object with the route params
    *
-   * EXAMPLE:
-   *
-   * path: /example/route/:id
-   * param: /example/route/253
-   * returns 253 as string
+   * example:
+   * path: /foo/:id/bar
+   * current route: /foo/123/bar
+   * returns: { 'id': '123' }
    */
   getRouteParams () {
-    // const currentQuery = this.getRouteParam.get()
-    // const queryName = 'NAME'
-    // this.query[queryName] = currentQuery
-    return this.getRouteInfoUtil.getRouteParams()
+    return this.getRouteParamsUtil.get()
   }
 }
