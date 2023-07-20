@@ -1,9 +1,13 @@
 import { RouteInfo, RoutePath } from '@types'
-import { RouteManager } from './routeManager'
-
-const routeManager = RouteManager.getInstance()
+import { RouteManager } from '../domain/routeManager'
+import { AreCurrentRouteDynamic } from './AreCurrentRouteDynamic'
+import { GetDynamicRoutePath } from './GetDynamicRoutePath'
 
 export class GetRouteInfo {
+  private routeManager = RouteManager.getInstance()
+  private areCurrentRoteDynamic = new AreCurrentRouteDynamic()
+  private getDynamicRoutePathUtil = new GetDynamicRoutePath()
+
   path (): RouteInfo['path'] {
     if (this.isDynamicRoute()) {
       return this.getDynamicRoutePath()
@@ -29,53 +33,25 @@ export class GetRouteInfo {
   }
 
   callback (): RouteInfo['callback'] {
-    const route = routeManager.find(this.path())
+    const route = this.routeManager.find(this.path())
     return route?.callback
   }
 
   isDynamicRoute (): boolean {
-    const routePath = window.location.hash.slice(1).split('/')
-    routePath.pop()
-
-    let isDynamicRoute = false
-
-    const dynamicPaths = routeManager.getDynamicPaths()
-
-    dynamicPaths.forEach(path => {
-      const arrPath = path.split('/')
-      arrPath.pop()
-      if (arrPath.join('') === routePath.join('')) {
-        isDynamicRoute = true
-      }
-    })
-
-    return isDynamicRoute
+    return this.areCurrentRoteDynamic.valid()
   }
 
   isValidRoute (path: RoutePath): boolean {
     if (this.isDynamicRoute()) {
       const dynamicPath = this.path()
-      return routeManager.getDynamicPaths().some(xpath => xpath === dynamicPath)
+      return this.routeManager.getDynamicPaths().some(xpath => xpath === dynamicPath)
     }
 
-    return routeManager.getStaticPaths().some(xpath => xpath === path)
+    return this.routeManager.getStaticPaths().some(xpath => xpath === path)
   }
 
   private getDynamicRoutePath (): RouteInfo['path'] {
-    const routePath = window.location.hash.slice(1).split('/')
-    routePath.pop()
-
-    let dynamicPath = ''
-
-    routeManager.getDynamicPaths().forEach(path => {
-      const arrPath = path.split('/')
-      arrPath.pop()
-      if (arrPath.join('') === routePath.join('')) {
-        dynamicPath = path
-      }
-    })
-
-    return dynamicPath as RoutePath
+    return this.getDynamicRoutePathUtil.get()
   }
 
   get (): RouteInfo {

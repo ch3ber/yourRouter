@@ -1,5 +1,5 @@
 import { RenderRoute } from '@/rendering/application/RenderRoute'
-import { RouteManager } from '@/routes/application/routeManager'
+import { RouteManager } from '@/routes/domain/routeManager'
 import { RouteI } from '@/types'
 import { describe, expect, it } from 'vitest'
 

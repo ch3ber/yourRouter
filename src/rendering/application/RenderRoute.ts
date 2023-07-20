@@ -1,6 +1,6 @@
 import { RouterConfig } from '@/types'
 import { renderTemplateInHtmlByQueryId } from '../domain/renderTemplateInHtmlByQueryId'
-import { GetRouteInfo } from '@/routes/application/getRouteInfo'
+import { GetRouteInfo } from '@/routes/application/GetRouteInfo'
 
 export class RenderRoute {
   private getRouteInfo = new GetRouteInfo()

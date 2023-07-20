@@ -1,19 +1,23 @@
-import { RouteCallback, RoutePath, RouterConfig } from '@types'
-import { MountRouter } from '../application/mountRouter'
-import { Redirect } from '../application/redirect'
-import { GetRouteParam } from '../application/GetRouteParam'
-import { AddRoute } from '../application/AddRoute'
+import { RouteCallback, RoutePath, RoutePathWithHash, RouterConfig } from '@types'
+
+import { MountRouter } from '@/router/application/mountRouter'
+import { AddRoute } from '@/router/application/AddRoute'
 import { RenderRoute } from '@/rendering/application/RenderRoute'
+import { GetRouteParams } from '@/routes/application/GetRouteParams'
+
+import { Redirect } from '@/router/domain/redirect'
 
 export class Router {
   // eslint-disable-next-line no-use-before-define
   private static _instance: Router | undefined
+  query: unknown
+
   private mountRouter: MountRouter
-  private redirect = new Redirect()
-  private getRouteParamUtil = new GetRouteParam()
+  private getRouteParamsUtil = new GetRouteParams()
   private addRouteUtil = new AddRoute()
   private renderRoute: RenderRoute
-  query: unknown
+
+  private redirect = new Redirect()
 
   private constructor (config: RouterConfig) {
     this.mountRouter = new MountRouter(config)
@@ -26,7 +30,7 @@ export class Router {
    * require a 404 path to create the instance
    * @param config router's config
    */
-  public static create (config: RouterConfig): Router | undefined {
+  public static create (config: RouterConfig): Router {
     if (typeof config.path404 !== 'string') {
       throw new Error('Please specific a 404 HTTP Error path in your Router config. To fix add { path404: "/example/path" } to your config.')
     }
@@ -35,10 +39,8 @@ export class Router {
       throw new Error('You are trying to create another Router.')
     }
 
-    if (!Router._instance) {
-      Router._instance = new Router(config)
-      return Router._instance
-    }
+    Router._instance = new Router(config)
+    return Router._instance
   }
 
   /*
@@ -61,7 +63,7 @@ export class Router {
   /*
   * Redirect the user to a existing route
   */
-  redirectTo (path: RoutePath): void {
+  redirectTo (path: RoutePath | RoutePathWithHash): void {
     this.redirect.to(path)
   }
 
@@ -81,19 +83,15 @@ export class Router {
     }
   }
 
-  /*
-   * returns the route param as string
+  /**
+   * Returns an object with the route params
    *
-   * EXAMPLE:
-   *
-   * path: /example/route/:id
-   * param: /example/route/253
-   * returns 253 as string
+   * example:
+   * path: /foo/:id/bar
+   * current route: /foo/123/bar
+   * returns: { 'id': '123' }
    */
-  getRouteParam () {
-    // const currentQuery = this.getRouteParam.get()
-    // const queryName = 'NAME'
-    // this.query[queryName] = currentQuery
-    return this.getRouteParamUtil.get()
+  getRouteParams () {
+    return this.getRouteParamsUtil.get()
   }
 }
