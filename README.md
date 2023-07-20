@@ -156,7 +156,7 @@ E-commerce SPA with template rendering, created without javascript frameworks.
 
 # Contributing 🤝
 
-[Contribution guideline](./CONTRIBUTING.md)
+[Contribution guideline](https://github.com/ch3ber/yourRouter/blob/main/CONTRIBUTING.md)
 
 # Feedback 📣
 
