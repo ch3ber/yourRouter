@@ -1,6 +1,6 @@
 {
   "name": "yourrouter",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A powerful router based on client-side routing.",
   "type": "module",
   "main": "./lib/index.js",
