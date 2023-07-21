@@ -1,5 +1,5 @@
-import { RouterConfig } from 'lib/types'
-import Router from '../../lib'
+import { RouterConfig } from '../../lib/types'
+import Router from '../../lib/index'
 
 const config: RouterConfig = {
   path404: '/notFound',
@@ -28,8 +28,8 @@ const Menu = () => {
 }
 
 const DynamicRoute = () => {
-  const param = router.getRouteParam()
-  const view = `<h1>The route param is: ${param}</h1>`
+  const { id } = router.getRouteParams()
+  const view = `<h1>The route param is: ${id}</h1>`
   return view
 }
 
