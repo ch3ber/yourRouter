@@ -13,6 +13,7 @@ A powerful router based on client-side routing.
 - Redirection without reloading the page
 - Bundle with 0 dependencies
 - Full typescript support
+- URL decode for route params
 
 # Working on new features 🛠️
 
